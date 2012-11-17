@@ -6,26 +6,32 @@
 % filtro de Wiener tal que x[n] =~ w[n] * p[n]
 %
 % El parámetro impl permite elegir entre una
-% implementación según las ecuaciones de Wiener-Hopfs
-% (impl='wienerhopfs', por defecto) 
-% y una basada en solución mínimos cuadrados
-% (impl='ls' (el resultado debería ser el mismo
-% con cualquiera de las dos implementciones).
+% implementación basada en solución mínimos cuadrados
+% (impl='ls', por defecto) 
+% y una según las ecuaciones de Wiener-Hopfs
+% (impl='wienerhopfs') 
+% El resultado debería ser el mismo
+% con cualquiera de las dos implementciones.
 %
 function [w Ryy ryx] = wiener(y, x, P, impl)
-	if(nargin < 4 || impl=='wienerhopfs')
+	
+	if(nargin < 4)
+		impl = 'leastsquare';
+	end
+	
+	if(impl == 'wienerhopfs')
 		% Implementación basada en las ecuaciones
 		% de Wiener-Hopfs
 		M = P - 1;
 		
-		rxy = xcorr(x, y, M, 'unbiased');
+		ryx = xcorr(x, y, M, 'unbiased');
 		ryy = xcorr(y, y, M, 'unbiased');
 
-		rxy = rxy(end-M:end);
+		ryx = ryx(end-M:end);
 		ryy = ryy(end-M:end);
 
 		Ryy = toeplitz(ryy);
-		w = inv(Ryy)*rxy';
+		w = inv(Ryy)*ryx';
 	else
 		% Implementación basada en solución
 		% mínimos cuadrados
@@ -40,7 +46,7 @@ function [w Ryy ryx] = wiener(y, x, P, impl)
 
 		Y = [];
 		for p = 0:P-1
-			Y = [Y y(end-p:1-1:P-p).'];
+			Y = [Y y(end-p:-1:P-p).'];
 		end
 
 		Ryy = Y.'*Y./(length(x)-P);
