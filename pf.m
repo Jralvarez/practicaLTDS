@@ -68,6 +68,7 @@ disp 'P = 2'
 yEst = (filter(w2, 1, y) > 0)*2 - 1; 
 Perr = sum(y == yEst)/length(x)
 
+disp Perr;
 disp 'P = 3'
 yEst = (filter(w3, 1, y) > 0)*2 - 1; 
 Perr = sum(y == yEst)/length(x)
