@@ -60,19 +60,19 @@ disp 'La señal x[n] está formada por símbilos equiprobables {-1, +1}. Si util
 
 disp 'P = 1'
 xEst = (filter(w1, 1, y) > 0)*2 - 1; 
-Perr = sum(x != xEst)/length(x)
+Perr = sum(x ~= xEst)/length(x)
 
 disp 'P = 2'
 xEst = (filter(w2, 1, y) > 0)*2 - 1; 
-Perr = sum(x != xEst)/length(x)
+Perr = sum(x ~= xEst)/length(x)
 
 disp 'P = 3'
 xEst = (filter(w3, 1, y) > 0)*2 - 1; 
-Perr = sum(x != xEst)/length(x)
+Perr = sum(x ~= xEst)/length(x)
 
 disp 'P = 10'
 xEst = (filter(w10, 1, y) > 0)*2 - 1; 
-Perr = sum(x != xEst)/length(x)
+Perr = sum(x ~= xEst)/length(x)
 
 disp 'Repita el punto 1 utilizando un algoritmo LMS para P=2 y mu=0.01. Muestre los coeficientes obtenidos y la convergencia del algoritmo.'
 [w2lms, elms] = lms(y, x, 2, 0.01);
