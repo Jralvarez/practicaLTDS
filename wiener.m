@@ -15,6 +15,10 @@
 %
 function [w Ryy ryx] = wiener(y, x, P, impl)
 	
+	%Asegurar que son filas
+	y = y(:)';
+	x = x(:)';
+
 	if(nargin < 4)
 		impl = 'leastsquare';
 	end

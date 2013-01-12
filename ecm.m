@@ -6,6 +6,9 @@
 % que deben tener la misma dimensión.
 %
 function e = ecm(x, y)
+	%Colocar los vectores como columnas si no lo están
+	x = x(:);
+	y = y(:);
 	e = sum((x - y).^2)/length(x);
 end
 
