@@ -1,4 +1,4 @@
-function a = levinsonDurbinRec(r)
+function [a P] = levinsonDurbinRec(r)
 
 %Fuerzo a que r sea columna
 r = r(:);

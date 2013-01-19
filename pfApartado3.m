@@ -1,14 +1,6 @@
 clear all;
 close all;
 
-load s1.mat;
-load s2.mat;
-
-%Debug
-%x = filter([0 0 1], 1, y); 
-%y = filter([0 0 1], 1, x); 
-%y = x;
-
 disp 'Parte 3'
 disp '- Apartado 1'
 coefs = [.5 .5];
@@ -44,25 +36,47 @@ disp 'p=1'
 coefs = [0.5]'
 x = generarProcesoAutoregresivo(coefs, 2000, 2);
 w = wiener(x(1:end-1), x(2:end), length(coefs), 'wienerhopfs')
-y = generarProcesoAutoregresivo(w, 2000, 2);
-errCuad = ecm(x, y)
+errCuad = ecm(w, coefs)
+disp ''
 
 disp 'p=2'
 coefs = [0.5 0.5]'
 x = generarProcesoAutoregresivo(coefs, 2000, 2);
 w = wiener(x(1:end-1), x(2:end), length(coefs), 'wienerhopfs')
-y = generarProcesoAutoregresivo(w, 2000, 2);
-errCuad = ecm(x, y)
+errCuad = ecm(w, coefs)
+disp ''
 
 disp 'p=3'
 coefs = [0.5 0.1 0.1]'
 x = generarProcesoAutoregresivo(coefs, 2000, 2);
 w = wiener(x(1:end-1), x(2:end), length(coefs), 'wienerhopfs')
-y = generarProcesoAutoregresivo(w, 2000, 2);
-errCuad = ecm(x, y)
+errCuad = ecm(w, coefs)
+disp ''
 
 
+disp '- Apartado 5'
+disp 'p=1'
+p = 1;
+rxx = xcorr(x, x, p, 'unbiased');
+rxx = rxx(end-p:end);
+[a v] = levinsonDurbinRec(rxx);
+w = -a(2:end)
+v
+disp ''
 
+p = 2;
+rxx = xcorr(x, x, p, 'unbiased');
+rxx = rxx(end-p:end);
+[a v] = levinsonDurbinRec(rxx);
+w = -a(2:end)
+v
+disp ''
 
-
-
+disp 'p=3'
+p = 3;
+rxx = xcorr(x, x, p, 'unbiased');
+rxx = rxx(end-p:end);
+[a v] = levinsonDurbinRec(rxx);
+w = -a(2:end)
+v
+disp ''
