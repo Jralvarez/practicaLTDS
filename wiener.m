@@ -1,9 +1,12 @@
 %%
 % José Ramón Álvarez Rojo 100038962@alumnos.uc3m.es
+% Javier García Zurdo     jgzurdo@pa.uc3m.es
+% Daniel Ruesga Ibáñez    100071034@alumnos.uc3m.es
+%
 % Noviembre de 2012
 %
-% Devuelve un vector con los P coeficientes del
-% filtro de Wiener tal que x[n] =~ w[n] * p[n]
+% Devuelve un vector w con los P coeficientes del
+% filtro de Wiener tal que x[n] =~ w[n] * y[n]
 %
 % El parámetro impl permite elegir entre una
 % implementación basada en solución mínimos cuadrados

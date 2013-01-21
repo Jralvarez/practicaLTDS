@@ -1,3 +1,9 @@
+%%
+% José Ramón Álvarez Rojo 100038962@alumnos.uc3m.es
+% Javier García Zurdo     jgzurdo@pa.uc3m.es
+% Daniel Ruesga Ibáñez    100071034@alumnos.uc3m.es
+%
+% Diciembre de 2013
 clear all;
 close all;
 
@@ -8,12 +14,14 @@ disp '- Apartado 1'
 
 N = length(z);
 fs = 1000;
-%df = fs/N;
-%f = [ -(ceil((N-1)/2):-1:1)*df 0 (1:floor((N-1)/2))*df ];
-%y = fftshift(abs(fft(z)));
-%disp 'frecuencias'
-%plot(f, y);
-%f(y > 500000)
+df = fs/N;
+f = [ -(ceil((N-1)/2):-1:1)*df 0 (1:floor((N-1)/2))*df ];
+y = fftshift(abs(fft(z))/(N/2));
+xlabel('Frecuencia (Hz)')
+ylabel('Nivel')
+plot(f, y);
+disp 'frecuencias'
+f(y > 0.5)
 
 disp '- Apartado 2'
 
@@ -38,14 +46,16 @@ for f = 1:length(freqs)
 	phases = [phases atan(w(2,f)/w(1,f))];
 end
 
-
+% Generar la señal según el modelo y los parámetros estimados
 s1 = amps(1)*sin(2*pi*freqs(1)*n/fs + phases(1));
 s2 = amps(2)*sin(2*pi*freqs(2)*n/fs + phases(2));
 s3 = amps(3)*sin(2*pi*freqs(3)*n/fs + phases(3));
 
 s = s1 + s2 + s3;
-plot((z-s)(1:1000));
-var(z-s)
 
-ecm(z,s)
+%Estimar la varianza
+disp 'Varianza'
+disp(var(z-s));
+disp 'Error cuadrático medio'
+disp(ecm(z,s));
 

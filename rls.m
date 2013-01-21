@@ -1,5 +1,8 @@
 %%
 % José Ramón Álvarez Rojo 100038962@alumnos.uc3m.es
+% Javier García Zurdo     jgzurdo@pa.uc3m.es
+% Daniel Ruesga Ibáñez    100071034@alumnos.uc3m.es
+%
 % Diciembre de 2012
 %
 % Ejecuta el algoritmo rls sobre la señal deseada d
