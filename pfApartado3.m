@@ -37,32 +37,31 @@ disp 'en 1 se desplaza a 1.002, suficiente para apreciar claramente'
 disp 'la inestabilidad del sistema si se genera la señal del enunciado'
 
 
-disp '- Apartado 3 y 4'
+disp '- Apartado 3'
 disp 'p=1'
 coefs = [0.5]'
 x = generarProcesoAutoregresivo(coefs, 2000, 2);
 w = wiener(x(1:end-1), x(2:end), length(coefs), 'wienerhopfs')
-errCuad = ecm(w, coefs)
 disp ''
 
 disp 'p=2'
 coefs = [0.5 0.5]'
 x = generarProcesoAutoregresivo(coefs, 2000, 2);
 w = wiener(x(1:end-1), x(2:end), length(coefs), 'wienerhopfs')
-errCuad = ecm(w, coefs)
 disp ''
 
 disp 'p=3'
 coefs = [0.5 0.1 0.1]'
 x = generarProcesoAutoregresivo(coefs, 2000, 2);
 w = wiener(x(1:end-1), x(2:end), length(coefs), 'wienerhopfs')
-errCuad = ecm(w, coefs)
 disp ''
 
 
 disp '- Apartado 5'
 disp 'p=1'
 p = 1;
+coefs = [0.5]'
+x = generarProcesoAutoregresivo(coefs, 2000, 2);
 rxx = xcorr(x, x, p, 'unbiased');
 rxx = rxx(end-p:end);
 [a v] = levinsonDurbinRec(rxx);
@@ -70,7 +69,10 @@ w = -a(2:end)
 v
 disp ''
 
+disp 'p=3'
 p = 2;
+coefs = [0.5 0.5]'
+x = generarProcesoAutoregresivo(coefs, 2000, 2);
 rxx = xcorr(x, x, p, 'unbiased');
 rxx = rxx(end-p:end);
 [a v] = levinsonDurbinRec(rxx);
@@ -80,6 +82,8 @@ disp ''
 
 disp 'p=3'
 p = 3;
+coefs = [0.5 0.1 0.1]'
+x = generarProcesoAutoregresivo(coefs, 2000, 2);
 rxx = xcorr(x, x, p, 'unbiased');
 rxx = rxx(end-p:end);
 [a v] = levinsonDurbinRec(rxx);
